@@ -268,7 +268,7 @@ func parseListen(cfg string, cs map[string]CertSource, readTimeout, writeTimeout
 		case "proto":
 			l.Proto = v
 			switch l.Proto {
-			case "tcp", "tcp+sni", "http", "https":
+			case "tcp", "tcp+sni", "tcp+sni+proxy", "http", "https":
 				// ok
 			default:
 				return Listen{}, fmt.Errorf("unknown protocol %q", v)

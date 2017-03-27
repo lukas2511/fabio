@@ -172,6 +172,9 @@ func startServers(cfg *config.Config) {
 		case "tcp+sni":
 			h := &tcp.SNIProxy{cfg.Proxy.DialTimeout, lookupHostFn(cfg)}
 			go proxy.ListenAndServeTCP(l, h, tlscfg)
+		case "tcp+sni+proxy":
+			h := &tcp.SNIProxyProxy{cfg.Proxy.DialTimeout, lookupHostFn(cfg)}
+			go proxy.ListenAndServeTCP(l, h, tlscfg)
 		default:
 			exit.Fatal("[FATAL] Invalid protocol ", l.Proto)
 		}
